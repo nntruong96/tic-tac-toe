@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { GameProvider } from '@/providers/GameProvider';
 import './globals.css';
 
 const geistSans = Geist({
@@ -24,7 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased w-[100dvw] h-[100dvh] font-[family-name:var(--font-geist-sans)] px-2`}
+      >
+        <GameProvider>{children}</GameProvider>
+      </body>
     </html>
   );
 }
