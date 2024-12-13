@@ -12,6 +12,8 @@ interface GameContextValue {
   winnerCombo: number[];
   setIsOpenModal: (isOpen: boolean) => void;
   handleCellClick: (index: number) => void;
+  isOpenModalReset: boolean;
+  setOpenModalReset: (isOpen: boolean) => void;
   reset: () => void;
 }
 const GameContext = createContext<GameContextValue | null>(null);
@@ -27,6 +29,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [board, setBoard] = useState<Board>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenModalReset, setOpenModalReset] = useState(false);
   const [winner, setWinner] = useState<CellPlayer | null>(null);
   const [winnerCombo, setWinnerCombo] = useState<number[]>([]);
   const handleCellClick = (index: number) => {
@@ -36,7 +39,6 @@ export function GameProvider({ children }: { children: ReactNode }) {
     setBoard(newBoard);
     setIsXNext(!isXNext);
     const currentWinner = checkWinner(newBoard);
-    console.log('currentWinner', currentWinner);
     if (!newBoard.includes(null) || currentWinner) {
       setIsOpenModal(true);
       setWinner(currentWinner?.winner || null);
@@ -58,6 +60,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
     setIsOpenModal,
     handleCellClick,
     reset,
+    isOpenModalReset,
+    setOpenModalReset,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
