@@ -4,7 +4,7 @@ import { useGameContext } from '@/providers/GameProvider';
 export default function GameBoard() {
   const { board, handleCellClick, winnerCombo, winner } = useGameContext();
   return (
-    <div className="grid grid-cols-3 w-full aspect-square max-w-[460px] max-h-[460px] gap-5 ">
+    <div className="grid grid-cols-3 w-full aspect-square max-h-[460px] gap-5 ">
       {board.map((cell, index) => (
         <Cell
           key={index}

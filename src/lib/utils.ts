@@ -1,5 +1,6 @@
 import { Board } from '@/types/type';
 import { CellPlayer } from '@/types/enum';
+import { GameStatistics } from '@/types/interface';
 interface checkWinnerResponse {
   winner: CellPlayer;
   combo: number[];
@@ -27,4 +28,18 @@ export function checkWinner(board: Board): checkWinnerResponse | null {
   }
 
   return null;
+}
+
+export function loadGameStatistics(): GameStatistics {
+  const GameStatistics = localStorage.getItem('GameStatistics');
+  let res = { [CellPlayer.X]: 0, [CellPlayer.O]: 0, tie: 0 };
+  if (!GameStatistics) return res;
+  try {
+    res = JSON.parse(GameStatistics);
+  } catch {}
+  return res;
+}
+
+export function saveGameStatistics(GameStatistics: GameStatistics) {
+  localStorage.setItem('GameStatistics', JSON.stringify(GameStatistics));
 }
