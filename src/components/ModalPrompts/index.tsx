@@ -44,7 +44,7 @@ export default function ModalPrompts() {
           <p className="text-silver-400 font-bold">{context.title}</p>
           <div
             className={classNames(
-              'flex items-center justify-center gap-4 font-bold text-[40px]',
+              'flex flex-wrap text-center items-center justify-center gap-4 font-bold text-[40px]',
               context.color
             )}
           >
