@@ -1,11 +1,16 @@
 'use client';
 import { createContext, useContext, ReactNode, useState } from 'react';
-import { CellStatus } from '@/types/enum';
-type Board = (CellStatus | null)[];
+import { CellPlayer } from '@/types/enum';
+import { checkWinner } from '@/lib/utils';
+import { Board } from '@/types/type';
+
 interface GameContextValue {
-  board: (CellStatus | null)[];
+  board: (CellPlayer | null)[];
   isXNext: boolean;
-  isFinished: boolean;
+  isOpenModal: boolean;
+  winner: CellPlayer | null;
+  winnerCombo: number[];
+  setIsOpenModal: (isOpen: boolean) => void;
   handleCellClick: (index: number) => void;
   reset: () => void;
 }
@@ -13,7 +18,7 @@ const GameContext = createContext<GameContextValue | null>(null);
 export function useGameContext() {
   const context = useContext(GameContext);
   if (!context) {
-    throw new Error('useGameContext phải được sử dụng bên trong GameProvider');
+    throw new Error('useGameContext must be used within GameProvider');
   }
   return context;
 }
@@ -21,28 +26,37 @@ export function useGameContext() {
 export function GameProvider({ children }: { children: ReactNode }) {
   const [board, setBoard] = useState<Board>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
-  const [isFinished, setIsFinished] = useState(false);
-
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [winner, setWinner] = useState<CellPlayer | null>(null);
+  const [winnerCombo, setWinnerCombo] = useState<number[]>([]);
   const handleCellClick = (index: number) => {
-    if (board[index]) return;
+    if (board[index] || winner) return;
     const newBoard = [...board];
-    newBoard[index] = isXNext ? CellStatus.X : CellStatus.O;
+    newBoard[index] = isXNext ? CellPlayer.X : CellPlayer.O;
     setBoard(newBoard);
     setIsXNext(!isXNext);
-    if (!newBoard.includes(null)) {
-      setIsFinished(true);
+    const currentWinner = checkWinner(newBoard);
+    console.log('currentWinner', currentWinner);
+    if (!newBoard.includes(null) || currentWinner) {
+      setIsOpenModal(true);
+      setWinner(currentWinner?.winner || null);
+      setWinnerCombo(currentWinner?.combo || []);
     }
   };
   const reset = () => {
     setBoard(Array(9).fill(null));
     setIsXNext(true);
-    setIsFinished(false);
+    setWinner(null);
+    setWinnerCombo([]);
   };
   const value = {
     board,
     isXNext,
+    isOpenModal,
+    winner,
+    winnerCombo,
+    setIsOpenModal,
     handleCellClick,
-    isFinished,
     reset,
   };
 

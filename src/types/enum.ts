@@ -1,4 +1,4 @@
-export enum CellStatus {
+export enum CellPlayer {
   X = 'X',
   O = 'O',
 }

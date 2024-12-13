@@ -3,7 +3,7 @@ import Button from '@/components/Button';
 import { XIcon, OIcon, ReloadIcon } from '@/components/Icons';
 import { useGameContext } from '@/providers/GameProvider';
 export default function GameControl() {
-  const { isXNext } = useGameContext();
+  const { isXNext, reset } = useGameContext();
   return (
     <div className="flex justify-between items-center w-full max-w-[460px] mb-6">
       <div className="flex gap-2">
@@ -18,7 +18,7 @@ export default function GameControl() {
         </div>
       </Button>
 
-      <Button color="silver">
+      <Button color="silver" onClick={reset}>
         <ReloadIcon />
       </Button>
     </div>
