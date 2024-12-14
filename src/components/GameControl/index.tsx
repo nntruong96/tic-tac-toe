@@ -13,7 +13,11 @@ export default function GameControl() {
 
       <Button color="navy" className="hover:!bg-navy-400 cursor-auto">
         <div className="flex items-center justify-center gap-2">
-          {isXNext ? <XIcon className="w-5 h-5" /> : <OIcon className="w-5 h-5" />}
+          {isXNext ? (
+            <XIcon className="w-5 h-5" data-testid="turn-x-icon" />
+          ) : (
+            <OIcon className="w-5 h-5" data-testid="turn-o-icon" />
+          )}
           TURN
         </div>
       </Button>
@@ -29,6 +33,7 @@ export default function GameControl() {
           }
           setOpenModalReset(true);
         }}
+        data-testid="reset-button"
       >
         <ReloadIcon />
       </Button>

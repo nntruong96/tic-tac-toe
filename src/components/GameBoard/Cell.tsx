@@ -19,7 +19,12 @@ export default function Cell({ cell, onClick, isHighlighted, disabled = false }:
           'bg-navy-400': !isHighlighted,
         }
       )}
-      onClick={onClick}
+      onClick={() => {
+        if (!disabled) {
+          onClick();
+        }
+      }}
+      data-testid="cell"
     >
       {cell === CellPlayer.X && (
         <XIcon
@@ -27,6 +32,7 @@ export default function Cell({ cell, onClick, isHighlighted, disabled = false }:
             'text-navy-400': isHighlighted,
             'text-teal-400': !isHighlighted,
           })}
+          data-testid="cell-x-icon"
         />
       )}
       {cell === CellPlayer.O && (
@@ -35,6 +41,7 @@ export default function Cell({ cell, onClick, isHighlighted, disabled = false }:
             'text-navy-400': isHighlighted,
             'text-yellow-400': !isHighlighted,
           })}
+          data-testid="cell-o-icon"
         />
       )}
     </div>

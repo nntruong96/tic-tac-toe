@@ -4,7 +4,7 @@ import { CellPlayer } from '@/types/enum';
 import { checkWinner, saveGameStatistics, loadGameStatistics } from '@/lib/utils';
 import { Board } from '@/types/type';
 import { GameStatistics } from '@/types/interface';
-interface GameContextValue {
+export interface GameContextValue {
   board: (CellPlayer | null)[];
   isXNext: boolean;
   isOpenModal: boolean;
@@ -20,7 +20,7 @@ interface GameContextValue {
   reset: () => void;
 }
 
-const GameContext = createContext<GameContextValue | null>(null);
+export const GameContext = createContext<GameContextValue | null>(null);
 export function useGameContext() {
   const context = useContext(GameContext);
   if (!context) {
