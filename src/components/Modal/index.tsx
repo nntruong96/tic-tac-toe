@@ -15,6 +15,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
         if (!onClose) return;
         onClose();
       }}
+      data-testid="modal-overlay"
     >
       <div className="relative min-h-[266px] gap-4 flex flex-col items-center justify-center bg-navy-500 rounded-lg py-6 px-2 w-full ">
         {children}
