@@ -14,13 +14,13 @@ export default function ModalPrompts() {
     switch (winner) {
       case CellPlayer.X:
         return {
-          icon: <XIcon className="w-[64px] h-[64px]" />,
+          icon: <XIcon className="w-[64px] h-[64px]" data-testid="modal-icon-x" />,
           title: 'Player 1 wins!',
           color: 'text-teal-400',
         };
       case CellPlayer.O:
         return {
-          icon: <OIcon className="w-[64px] h-[64px]" />,
+          icon: <OIcon className="w-[64px] h-[64px]" data-testid="modal-icon-o" />,
           title: 'Player 2 wins!',
           color: 'text-yellow-400',
         };

@@ -3,7 +3,6 @@ import { render } from '@testing-library/react';
 import GameStatistics from './index';
 import { GameContext, GameContextValue } from '@/providers/GameProvider';
 import '@testing-library/jest-dom';
-// import { CellPlayer } from '@/types/enum';
 
 const mockContext: GameContextValue = {
   board: Array(9).fill(null),
