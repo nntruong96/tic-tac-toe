@@ -51,23 +51,25 @@ export function GameProvider({ children }: { children: ReactNode }) {
     setIsXNext(!isXNext);
     const currentWinner = checkWinner(newBoard);
 
-    if (isBoardFull(newBoard) || currentWinner) {
+    if (currentWinner) {
+      const newGameStatistics = {
+        ...gameStatistics,
+        [currentWinner.winner]: gameStatistics[currentWinner.winner] + 1,
+      };
+      onSaveGameStatistics(newGameStatistics);
       setIsOpenModal(true);
-      setWinner(currentWinner?.winner || null);
-      setWinnerCombo(currentWinner?.combo || []);
-      if (currentWinner) {
-        const newGameStatistics = {
-          ...gameStatistics,
-          [currentWinner.winner]: gameStatistics[currentWinner.winner] + 1,
-        };
-        onSaveGameStatistics(newGameStatistics);
-      }
+      setWinner(currentWinner.winner);
+      setWinnerCombo(currentWinner.combo);
     }
-    if (isBoardFull(newBoard) && !currentWinner) {
+
+    if (isBoardFull(newBoard)) {
       const newGameStatistics = {
         ...gameStatistics,
         tie: gameStatistics.tie + 1,
       };
+      setIsOpenModal(true);
+      setWinner(null);
+      setWinnerCombo([]);
       onSaveGameStatistics(newGameStatistics);
     }
   };
