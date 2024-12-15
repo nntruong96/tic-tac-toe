@@ -50,7 +50,6 @@ export function GameProvider({ children }: { children: ReactNode }) {
     setBoard(newBoard);
     setIsXNext(!isXNext);
     const currentWinner = checkWinner(newBoard);
-
     if (currentWinner) {
       const newGameStatistics = {
         ...gameStatistics,
@@ -60,6 +59,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
       setIsOpenModal(true);
       setWinner(currentWinner.winner);
       setWinnerCombo(currentWinner.combo);
+      return;
     }
 
     if (isBoardFull(newBoard)) {
