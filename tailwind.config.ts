@@ -10,7 +10,7 @@ export default {
     extend: {
       colors: {
         background: 'theme(colors.navy.500)',
-        foreground: 'theme(colors.navy.500)',
+        foreground: 'theme(colors.white)',
         teal: {
           300: '#65E9E4',
           400: '#31C3BD',
