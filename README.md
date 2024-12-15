@@ -133,6 +133,7 @@ src/
 
 1.  Improving UX:
     • When a winner has already been determined, clicking “reset” should not require confirmation.
+    • Use memo for the Cell component to prevent it from re-rendering when its props have not changed.
 2.  Adding Animations:
     • Add animations when a user clicks on a cell.
     • Add animations for rendering the board.
